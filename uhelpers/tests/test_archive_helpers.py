@@ -16,7 +16,7 @@ from ..archive_helpers import get_exoplanet_orbit_database, gacs_list_query
 
 local_dir = os.path.dirname(os.path.abspath(__file__))
 
-ON_TRAVIS = os.getenv('TRAVIS', False)
+ON_TRAVIS = os.environ.get('TRAVIS') == 'true'
 
 def test_eod():
     """Test the access to the exoplanet orbit database."""
