@@ -15,7 +15,7 @@ from astropy.table import Table
 from astroquery.simbad import Simbad
 
 class AstroSource(object):
-    """Class for astronomical sources, e.g. stars, brown dwarfs.
+    """Class for astronomical sources.
 
     Notes
     -----
