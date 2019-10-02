@@ -10,10 +10,13 @@ import netrc
 import os
 
 from astropy.table import Table
+import pytest
 
 from ..archive_helpers import get_exoplanet_orbit_database, gacs_list_query
 
 local_dir = os.path.dirname(os.path.abspath(__file__))
+
+ON_TRAVIS = os.getenv('TRAVIS', False)
 
 def test_eod():
     """Test the access to the exoplanet orbit database."""
@@ -21,16 +24,16 @@ def test_eod():
 
     assert len(catalog) > 100
 
-
+@pytest.mark.skipif(ON_TRAVIS, reason='Requires access to .netrc file.')
 def test_gacs_list_query():
-    print('test gacs list query')
+    # print('test gacs list query')
     # Define which host in the .netrc file to use
     HOST = 'http://gea.esac.esa.int'
     # Read from the .netrc file in your home directory
     secrets = netrc.netrc()
     username, account, password = secrets.authenticators(HOST)
 
-    out_dir = os.path.join(os.path.dirname(__file__), 'tmp')
+    out_dir = os.path.dirname(__file__)
     T = Table()
     id_str_input_table = 'ID_HIP'
     T[id_str_input_table] = [1, 2, 3, 4, 5, 6, 7]

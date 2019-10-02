@@ -176,7 +176,7 @@ def return_gacs_query_as_table(query_string, output_file_seed, overwrite=False, 
 
 
 def gacs_list_query(username, password, out_dir, input_table, input_table_name, gacs_table_name, id_str_gacs_table,
-                    id_str_input_table, verbose=0, dr_string='gaiadr2', overwrite=1, outputFileName=None):
+                    id_str_input_table, verbose=False, dr_string='gaiadr2', overwrite=True, outputFileName=None):
     """Upload file that contains list of target identifiers to Gaia archive (GACS),
     and crossmatch it with given GACS table using the identifier.
 
@@ -249,9 +249,9 @@ def gacs_list_query(username, password, out_dir, input_table, input_table_name, 
 
     if outputFileName is None:
         outputFileName = os.path.join(out_dir, '%s_%s_matched_on_%s.vot' % (
-        gacs_table_name, input_table_name, id_str_gacs_table));
+        gacs_table_name, input_table_name, id_str_gacs_table))
 
-    if (overwrite == 1) | (not os.path.isfile(outputFileName)):
+    if overwrite | (not os.path.isfile(outputFileName)):
         pga.authenticatedQuery(username, password, queryString, outputFileName, retrieve=True)
 
     T = Table.read(outputFileName, format='votable')
