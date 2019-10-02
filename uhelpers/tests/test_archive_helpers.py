@@ -18,6 +18,7 @@ local_dir = os.path.dirname(os.path.abspath(__file__))
 
 ON_TRAVIS = os.environ.get('TRAVIS') == 'true'
 
+@pytest.mark.skipif(ON_TRAVIS, reason='timeout issue.')
 def test_eod():
     """Test the access to the exoplanet orbit database."""
     catalog = get_exoplanet_orbit_database(local_dir, verbose=False)
