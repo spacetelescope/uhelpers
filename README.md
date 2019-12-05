@@ -2,6 +2,8 @@
 [![Documentation Status](https://readthedocs.org/projects/uhelpers/badge/?version=latest)](https://uhelpers.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/uhelpers.svg)](https://badge.fury.io/py/uhelpers)
 [![PyPI - License](https://img.shields.io/pypi/l/Django.svg)](https://github.com/spacetelescope/uhelpers/blob/master/LICENSE.md)
+[![DOI](https://zenodo.org/badge/208097106.svg)](https://zenodo.org/badge/latestdoi/208097106)
+
 
 # uhelpers  -  your helper modules
 
