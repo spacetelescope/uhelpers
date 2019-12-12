@@ -87,6 +87,22 @@ class AstroSource(object):
             except IndexError:
                 print('No Gaia identifier listed in Simbad!')
 
+    def set_hip_id(self):
+        """Add the Hipparcos identifier attribute."""
+
+        if hasattr(self, 'IDS') is False:
+            raise RuntimeError('RUN set_simbad_fields() first!')
+        try:
+            self.simbad_identifiers = self.IDS.decode().split('|')
+        except AttributeError:
+            self.simbad_identifiers = self.IDS.split('|')
+
+        self.hip_id = None
+        try:
+            self.hip_id = [np.int(id.split()[1]) for id in self.simbad_identifiers if 'HIP ' in id][0]
+        except IndexError:
+            print('No Hipparcos identifier listed in Simbad!')
+
 
     def add_gaia(self):
         """Retrieve and add Gaia DR2 or DR1 parameters."""
