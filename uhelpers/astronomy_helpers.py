@@ -85,7 +85,7 @@ class AstroSource(object):
             try:
                 self.gaia_dr1_id = [id for id in self.simbad_identifiers if 'Gaia DR1 ' in id][0]
             except IndexError:
-                print('No Gaia identifier listed in Simbad!')
+                print('{}: No Gaia identifier listed in Simbad!'.format(self.identifier))
 
     def set_hip_id(self):
         """Add the Hipparcos identifier attribute."""
