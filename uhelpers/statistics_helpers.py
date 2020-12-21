@@ -44,7 +44,7 @@ def f_test_probability(N, p1, Chi2_1, p2, Chi2_2):
     nu1 = p2 - p1
     nu2 = N - p2  # degrees of freedom
 
-    if (Chi2_1 < Chi2_2):
+    if np.any(Chi2_1 < Chi2_2):
         raise RuntimeWarning('Solution better with less parameters')
 
     # F test
