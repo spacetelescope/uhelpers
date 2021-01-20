@@ -11,11 +11,11 @@ Use
 """
 import os
 import numpy as np
-import pylab as pl
+import matplotlib.pyplot as pl
 from scipy.stats import norm
 
 
-def histogram_with_gaussian_fit(omc, facecolors=None, labels=None, titles=None, linecolors=None, xlabel='value', normed=0,
+def histogram_with_gaussian_fit(omc, facecolors=None, labels=None, titles=None, linecolors=None, xlabel='value', 
                                 save_plot=0, out_dir='', name_seed='', separate_panels=False, show_fit=True, **kwargs):
     """Plot one or several histograms and perform Gaussian fit(s).
 
@@ -72,14 +72,10 @@ def histogram_with_gaussian_fit(omc, facecolors=None, labels=None, titles=None, 
             histlabel = labels[i]
         else:
             histlabel = None
-        n, bins, patches = pl.hist(data, normed=normed, facecolor=facecolors[i], color=linecolors[i], alpha=alpha,
+        n, bins, patches = pl.hist(data, facecolor=facecolors[i], color=linecolors[i], alpha=alpha,
                                    histtype='stepfilled', label=histlabel, **kwargs)
-        if normed:
-            normFact = 1.
-            ylabel = 'Probability'
-        else:
-            normFact = np.sum(n) * np.mean(np.diff(bins));
-            ylabel = 'N'
+        normFact = np.sum(n) * np.mean(np.diff(bins));
+        ylabel = 'N'
         if show_fit:
             y = norm.pdf(bins, mu, sigma)  # add a 'best fit' line
             l = pl.plot(bins, y * normFact, 'k-', linewidth=2, color=linecolors[i],
@@ -102,7 +98,7 @@ def histogram_with_gaussian_fit(omc, facecolors=None, labels=None, titles=None, 
 
 
 def multiple_histograms(all_data, facecolors=None, labels=None, titles=None,
-                             linecolors=None, xlabel='value', normed=0, save_plot=0, out_dir='',
+                             linecolors=None, xlabel='value', save_plot=0, out_dir='',
                              name_seed='', separate_panels=False, show_fit=True, **kwargs):
     """
 
@@ -114,7 +110,6 @@ def multiple_histograms(all_data, facecolors=None, labels=None, titles=None,
     titles
     linecolors
     xlabel
-    normed
     save_plot
     out_dir
     name_seed
@@ -151,15 +146,11 @@ def multiple_histograms(all_data, facecolors=None, labels=None, titles=None,
 
         data = all_data[i]
         histlabel = labels[i]
-        n, bins, patches = pl.hist(data, normed=normed, facecolor=facecolors[i],
+        n, bins, patches = pl.hist(data, facecolor=facecolors[i],
                                    color=linecolors[i], alpha=alpha, histtype='stepfilled',
                                    label=histlabel, **kwargs)
-        if normed:
-            normFact = 1.
-            ylabel = 'Probability'
-        else:
-            normFact = np.sum(n) * np.mean(np.diff(bins))
-            ylabel = 'N'
+        normFact = np.sum(n) * np.mean(np.diff(bins))
+        ylabel = 'N'
 
         if titles is not None:
             pl.title(titles[i])
