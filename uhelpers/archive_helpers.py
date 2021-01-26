@@ -27,6 +27,7 @@ import numpy as np
 import pygacs.public.publicAccessTools as pgp
 import pygacs.authen.manip as pga
 
+import casjobs
 
 CASJOBS_BASE_URL = 'http://mastweb.stsci.edu/gcasjobs/services/jobs.asmx'
 
