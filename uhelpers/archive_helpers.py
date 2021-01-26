@@ -298,7 +298,7 @@ def execute_casjobs_query(userid, password, query, table_name, out_file,
         print(query)
 
     #         see https://galex.stsci.edu/casjobs/download/casjobs.config.x
-    jobs = casjobs.CasJobs(userid=userid, password=password,
+    jobs = casjobs.CasJobs(userid=userid, password=password, request_type="POST",
                            base_url=CASJOBS_BASE_URL)
 
     # get information on all previous jobs
