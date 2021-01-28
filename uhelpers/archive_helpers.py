@@ -290,6 +290,8 @@ def execute_casjobs_query(userid, password, query, table_name, out_file,
         Flag 0/1
 
     """
+    output_format = out_file.split(".")[-1].upper()
+    
     casjobs_status_codes = np.array(['ready','started','canceling','cancelled','failed','finished'])
 
     job_is_ready = 1
@@ -328,7 +330,7 @@ def execute_casjobs_query(userid, password, query, table_name, out_file,
                 if verbose:
                     print('Query has finished, let\'s download the data')
                 try:
-                    job_id = jobs.request_and_get_output(table_name, 'FITS', out_file)
+                    job_id = jobs.request_and_get_output(table_name, output_format, out_file)
                 except Exception as e:
                     raise Exception('casjobs table download failed with message: {}\nPlease check that table {} is not empty.'.format(e, table_name))
             else:
